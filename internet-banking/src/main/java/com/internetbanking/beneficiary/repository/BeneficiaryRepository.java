@@ -1,0 +1,16 @@
+package com.internetbanking.beneficiary.repository;
+
+import com.internetbanking.beneficiary.entity.Beneficiary;
+import com.internetbanking.user.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> {
+    List<Beneficiary> findByUserOrderByCreatedAtDesc(User user);
+    boolean existsByUserAndAccountNumber(User user, String accountNumber);
+    Optional<Beneficiary> findByIdAndUser(Long id, User user);
+}
